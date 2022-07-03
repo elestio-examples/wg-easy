@@ -1,0 +1,23 @@
+version: "3.3"
+services:
+  wg-easy:
+    environment:
+      - WG_HOST=[CI_CD_DOMAIN]
+      - PASSWORD=${SOFTWARE_PASSWORD}
+      - WG_PORT=51820
+      - WG_DEFAULT_ADDRESS=10.8.0.x
+      - WG_DEFAULT_DNS=1.1.1.1
+
+    image: weejewel/wg-easy:${SOFTWARE_VERSION_TAG}
+    volumes:
+      - ./wireguard:/etc/wireguard
+    ports:
+      - "172.17.0.1:51821:51821/tcp"
+      - "51820:51820/udp"
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1    
