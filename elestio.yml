@@ -33,5 +33,5 @@ lifeCycleConfig:
 webUI:
   - url: "https://[CI_CD_DOMAIN]"
     label: "WireGuard"
-    password: "[ADMIN_PASSWORD]"
+    password: "[SOFTWARE_PASSWORD]"
   
